@@ -1,4 +1,3 @@
-import React from 'react';
 function LocationInfo({ location, accessToken }) {
   return (
     <>
