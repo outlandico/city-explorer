@@ -40,3 +40,14 @@
 .read-the-docs {
   color: #888;
 }
+
+/* app.css */
+
+/* styles.css */
+.red-background {
+  background-color: rgb(14, 173, 168);
+  min-height: 100vh;
+}
+
+
+
