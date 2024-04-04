@@ -1,26 +1,32 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
 
-function CityForm() {
-  const [city, setCity] = useState('');
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+
+function CityForm({ onCitySearch, city, handleChange }) {
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [error, setError] = useState(null); // State to manage error message
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('City submitted:', city); 
-    setMapLoaded(true); // Set mapLoaded to true when the form is submitted
-  };
-
-  const handleChange = (event) => {
-    setCity(event.target.value);
+    try {
+      console.log('City submitted:', city);
+      setMapLoaded(false); // Hide map until new city data is loaded
+      await onCitySearch(city);
+      // Reset error state if no error occurs
+      setError(null);
+    } catch (error) {
+      console.error('Error:', error);
+      setError('Failed to fetch weather data'); // Set error message
+    }
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>
+        <label htmlFor="cityInput">
           Enter a city name:
           <input
+            id="cityInput"
             type="text"
             value={city}
             onChange={handleChange}
@@ -40,8 +46,16 @@ function CityForm() {
           />
         </div>
       )}
+      {error && <p className="error-message">{error}</p>} {/* Render error message if error state is set */}
     </div>
   );
 }
+
+// Prop types validation
+CityForm.propTypes = {
+  onCitySearch: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+};
 
 export default CityForm;

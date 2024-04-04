@@ -50,3 +50,14 @@ Finish time: 11:29pm
 Actual time needed to complete: 5 hours
 
 [Lighthouse Report](<src/screenshots/Screenshot 2024-04-02 at 11.26.52 PM (3).png>)
+
+Name of feature:
+Estimate of time needed to complete: 3
+
+Start time: 1:30pm
+
+Finish time: 10:09pm
+
+Actual time needed to complete: 5 hours
+const mapApiKey = import.meta.env.VITE_MAP_KEY;z
+[Lighthouse](<src/screenshots/Screenshot 2024-04-03 at 9.11.40 PM (3).png>)

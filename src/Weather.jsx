@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'; // Import Bootstrap Card component
 import PropTypes from 'prop-types'; // Import PropTypes
 
 function Weather({ forecast }) {
+  console.log(forecast);
   return (
     <div className="weather-container">
       <h2 className="mb-4">Weather Forecast</h2>
@@ -28,8 +29,11 @@ Weather.propTypes = {
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     temperature: PropTypes.number.isRequired,
+    humidity: PropTypes.number, // Example additional property
+    windSpeed: PropTypes.number, // Example additional property
     // Add more PropTypes for other properties if needed
   }).isRequired,
 };
+
 
 export default Weather;
