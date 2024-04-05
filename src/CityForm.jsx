@@ -10,8 +10,8 @@ function CityForm({ onCitySearch, city, handleChange }) {
     event.preventDefault();
     try {
       console.log('City submitted:', city);
-      setMapLoaded(false); // Hide map until new city data is loaded
-      await onCitySearch(city);
+      setMapLoaded(true); // Hide map until new city data is loaded
+       onCitySearch(city);
       // Reset error state if no error occurs
       setError(null);
     } catch (error) {
@@ -45,7 +45,7 @@ function CityForm({ onCitySearch, city, handleChange }) {
             src={`https://maps.google.com/maps?q=${city}&output=embed`}
           />
         </div>
-      )}
+)}
       {error && <p className="error-message">{error}</p>} {/* Render error message if error state is set */}
     </div>
   );
