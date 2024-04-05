@@ -21,11 +21,11 @@ function App() {
     console.log(city);
   };
 
-  const handleCitySearch = async (cityName) => {
+  const handleCitySearch = async () => {
     // setIsLoading(true);
 
     try {
-      const locationResponse = await fetch(`https://us1.locationiq.com/v1/search?key=${locationApiKey}&q=${cityName}&format=json`);
+      const locationResponse = await fetch(`https://us1.locationiq.com/v1/search?key=${locationApiKey}&q=${city}&format=json`);
       if (!locationResponse.ok) {
         throw new Error('Failed to fetch location data');
       }
