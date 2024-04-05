@@ -13,9 +13,9 @@ function Weather({ forecast }) {
           <Card.Text>
             <strong>Description:</strong> {forecast.description}
           </Card.Text>
-          <Card.Text>
+          {/* <Card.Text>
             <strong>Temperature:</strong> {forecast.temperature}°C
-          </Card.Text>
+          </Card.Text> */}
           {/* You can add more weather details here */}
         </Card.Body>
       </Card>
