@@ -4,6 +4,7 @@ import { Card, CardImg, CardBody, CardTitle, CardText, Container, Row, Col } fro
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchMovies();
@@ -15,15 +16,17 @@ const Movies = () => {
       if (response.status === 200) {
         setMovies(response.data); // Set movies state with fetched data
       } else {
-        console.error('Error:', response.data.message);
+        setError('Error fetching movies');
       }
     } catch (error) {
       console.error('Network error:', error);
+      setError('Network error: Failed to fetch movies');
     }
   };
 
   return (
     <Container>
+      {error && <p className="error-message">{error}</p>}
       <Row>
         {movies.map((movie, index) => (
           <Col key={index} sm="6" md="4" lg="3">

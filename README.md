@@ -74,7 +74,7 @@ const mapApiKey = import.meta.env.VITE_MAP_KEY;
 
 [Lighthouse Report](<src/screenshots/Screenshot 2024-04-04 at 6.36.31 PM.png>)
 
-Trello: https://trello.com/b/81HnSBq9/city-exploreroutlandico
+Trello: ( https//trello.com/b/81HnSBq9/city-exploreroutlandico )
 
 Name of feature: Lab Assignment 8 in Trello finished two cards/about to finish 2nd card
 Estimate of time needed to complete: 3

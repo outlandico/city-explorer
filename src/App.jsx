@@ -9,6 +9,7 @@ const locationApiKey = import.meta.env.VITE_LOCATION_API_KEY;
 // const locationServer = import.meta.env.VITE_LOCATION_SERVER_URL;
 
 const apiUrl = import.meta.env.VITE_API_SERVER;
+const renderUrl = 'https://api.render.com/deploy/srv-co7r6bf79t8c73eobrt0?key=W770EgJti3c'; // Replace 'YOUR_RENDER_URL' with your actual Render URL
 
 // Initialize state object with an empty array for movies
 const state = {
@@ -74,7 +75,7 @@ function App() {
         throw new Error('Failed to fetch location data');
       }
       // const locationData = await locationResponse.json();
-      const weatherResponse = await fetch(`${apiUrl}/weather?city=${city}`);
+      const weatherResponse = await fetch(`${renderUrl}/weather?city=${city}`);
       console.log(weatherResponse);
       if (!weatherResponse.ok) {
         throw new Error('Failed to fetch weather data');
