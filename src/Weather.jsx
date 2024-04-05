@@ -1,4 +1,3 @@
-
 import { Card } from 'react-bootstrap'; // Import Bootstrap Card component
 import PropTypes from 'prop-types'; // Import PropTypes
 
@@ -13,9 +12,11 @@ function Weather({ forecast }) {
           <Card.Text>
             <strong>Description:</strong> {forecast.description}
           </Card.Text>
-          {/* <Card.Text>
-            <strong>Temperature:</strong> {forecast.temperature}°C
-          </Card.Text> */}
+          {forecast.temperature && ( // Conditional rendering for temperature
+            <Card.Text>
+              <strong>Temperature:</strong> {forecast.temperature}°C
+            </Card.Text>
+          )}
           {/* You can add more weather details here */}
         </Card.Body>
       </Card>
@@ -28,12 +29,11 @@ Weather.propTypes = {
   forecast: PropTypes.shape({
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    temperature: PropTypes.number.isRequired,
+    temperature: PropTypes.number, // Remove isRequired from temperature
     humidity: PropTypes.number, // Example additional property
     windSpeed: PropTypes.number, // Example additional property
     // Add more PropTypes for other properties if needed
   }).isRequired,
 };
-
 
 export default Weather;
