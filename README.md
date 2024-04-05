@@ -61,3 +61,17 @@ Finish time: 10:09pm
 Actual time needed to complete: 5 hours
 const mapApiKey = import.meta.env.VITE_MAP_KEY;z
 [Lighthouse](<src/screenshots/Screenshot 2024-04-03 at 9.11.40 PM (3).png>)
+
+Name of feature: (Catchup Day)
+Estimate of time needed to complete: 3
+
+Start time: 1:22pm
+
+Finish time: 6:35pm
+
+Actual time needed to complete: 3hours
+const mapApiKey = import.meta.env.VITE_MAP_KEY;
+
+[Lighthouse Report](<src/screenshots/Screenshot 2024-04-04 at 6.36.31 PM.png>)
+
+Trello: https://trello.com/b/81HnSBq9/city-exploreroutlandico
