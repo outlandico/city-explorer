@@ -9,7 +9,6 @@ const locationApiKey = import.meta.env.VITE_LOCATION_API_KEY;
 // const locationServer = import.meta.env.VITE_LOCATION_SERVER_URL;
 
 const apiUrl = import.meta.env.VITE_API_SERVER;
-const renderUrl = 'https://api.render.com/deploy/srv-co7r6bf79t8c73eobrt0?key=W770EgJti3c'; // Replace 'YOUR_RENDER_URL' with your actual Render URL
 
 // Initialize state object with an empty array for movies
 const state = {
@@ -21,14 +20,15 @@ async function fetchMovies(searchTerm) { // Pass searchTerm as an argument
   try {
     const response = await axios.get(`${apiUrl}/movies`, { // Send GET request to /movies endpoint
       params: {
-        lat: 'your_lat_value', // Provide latitude here
-        lon: 'your_lon_value', // Provide longitude here
+        // lat, // Provide latitude here
+        // lon, // Provide longitude here
         searchQuery: searchTerm // Pass the user-provided search term
       }
     });
     if (response.status === 200) {
       // Update the movies array in the state object with the fetched movie data
       state.movies = response.data;
+      console.log(state.movies);
       // Call a function to update the UI with the fetched movie data
       updateUI();
     } else {
@@ -66,17 +66,19 @@ function App() {
     console.log(city);
   };
 
-  const handleCitySearch = async (cityName) => {
+  const handleCitySearch = async (city) => {
+    console.log('City:', city);
+
     // setIsLoading(true);
 
     try {
-      const locationResponse = await fetch(`https://us1.locationiq.com/v1/search?key=${locationApiKey}&q=${cityName}&format=json`);
+      const locationResponse = await fetch(`https://us1.locationiq.com/v1/search?key=${locationApiKey}&q=${city}&format=json`);
       if (!locationResponse.ok) {
         throw new Error('Failed to fetch location data');
       }
       // const locationData = await locationResponse.json();
-      const weatherResponse = await fetch(`${renderUrl}/weather?city=${city}`);
-      console.log(weatherResponse);
+      const weatherResponse = await fetch(`${apiUrl}/weather?city=${city}`);
+      console.log(locationResponse);
       if (!weatherResponse.ok) {
         throw new Error('Failed to fetch weather data');
       }
@@ -87,7 +89,7 @@ function App() {
       setError('');
 
       // Send request to /movies endpoint with the user-provided search term
-      await fetchMovies(cityName);
+      await fetchMovies(city);
     } catch (error) {
       console.error(error);
       setError('Failed to fetch weather data. Please try again.');
