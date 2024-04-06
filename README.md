@@ -85,3 +85,15 @@ Finish time: 1130pm
 
 Actual time needed to complete: 6 hours
 [Lighthouse Report](<src/screenshots/Screenshot 2024-04-04 at 11.31.11 PM.png>)
+
+Trello: ( [Trello](https://trello.com/b/81HnSBq9/city-exploreroutlandico) )
+
+Name of feature: Lab Assignment 8 in Trello finished two cards/about to finish 2nd card
+Estimate of time needed to complete: 3
+
+Start time: 2pm
+
+Finish time: 1130pm
+
+Actual time needed to complete: 4 hours
+![Lighthouse Report](<src/screenshots/Screenshot 2024-04-05 at 1.28.29 PM.png>)
