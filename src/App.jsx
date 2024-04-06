@@ -92,6 +92,7 @@ function App() {
       await fetchMovies(city);
     } catch (error) {
       console.error(error);
+      // testing to see if I correctly acp"
       setError('Failed to fetch weather data. Please try again.');
     } 
     // finally {
