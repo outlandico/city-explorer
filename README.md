@@ -21,7 +21,7 @@ I am using HTML, CSS, JavaScript, Bootstrap, API Keys, Github, Trello, VS Code, 
 
 4-1-2024 Yesterday through today: had issues with the functionality of my App Deployment.
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+4-7-2024 Finally got the movies to display on locahost and realized it was a simple fix after TA Brandon and Tammy got me back on track along with John.
 
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
@@ -97,3 +97,15 @@ Finish time: 1130pm
 
 Actual time needed to complete: 4 hours
 ![Lighthouse Report](<src/screenshots/Screenshot 2024-04-05 at 1.28.29 PM.png>)
+
+Name of feature: Lab Assignment 8 in Trello finished two cards/about to finish 2nd card
+Estimate of time needed to complete: 3
+
+Start time: 3pm
+
+Finish time: 617pm
+
+Actual time needed to complete: 3 hours
+
+![Lighthouse Report](<screenshots/Screenshot 2024-04-06 at 6.16.26 PM.png>)
+

@@ -1,13 +1,10 @@
-import { useState,  } from 'react';
-import axios from 'axios'; // Import Axios library
+import { useState } from 'react';
+import axios from 'axios';
 import CityForm from './CityForm.jsx';
 import Weather from './Weather.jsx';
 import './App.css';
 
-// Define your locationApiKey and locationServer
 const locationApiKey = import.meta.env.VITE_LOCATION_API_KEY;
-// const locationServer = import.meta.env.VITE_LOCATION_SERVER_URL;
-
 const apiUrl = import.meta.env.VITE_API_SERVER;
 
 function App() {
@@ -19,12 +16,9 @@ function App() {
 
   const handleChange = (event) => {
     setCity(event.target.value);
-    console.log(city);
   };
 
   const handleCitySearch = async (city) => {
-    console.log('City:', city);
-
     setIsLoading(true);
 
     try {
@@ -41,23 +35,35 @@ function App() {
       setError('');
 
       // Fetch movies
-      const moviesResponse = await axios.get(`${apiUrl}/movies`, {
-        params: {
-          searchQuery: city
-        }
-      });
-      if (moviesResponse.status === 200) {
-        setMovies(moviesResponse.data);
-      } else {
-        setError('Error fetching movies');
-      }
+      const moviesResponse = await fetchMovies(city);
+      setMovies(moviesResponse);
     } catch (error) {
       console.error(error);
-      setError('Failed to fetch weather data. Please try again.');
+      setError('Failed to fetch data. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Function to fetch movies from the server
+  async function fetchMovies(searchQuery) {
+    try {
+      const response = await axios.get(`${apiUrl}/movies`, {
+        params: {
+          searchQuery: searchQuery
+        }
+      });
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        console.error('Error:', response.data.message);
+        return [];
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      return [];
+    }
+  }
 
   return (
     <div className="container">
@@ -65,6 +71,7 @@ function App() {
       {weatherData.length > 0 && weatherData.map((data, index) => (
         <Weather key={index} forecast={data} />
       ))}
+
       <div className="movies-container">
         {isLoading && <p>Loading...</p>}
         {error && <p className="error-message">{error}</p>}
