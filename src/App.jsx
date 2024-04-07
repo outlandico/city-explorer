@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,  } from 'react';
 import axios from 'axios'; // Import Axios library
 import CityForm from './CityForm.jsx';
 import Weather from './Weather.jsx';
@@ -10,56 +10,12 @@ const locationApiKey = import.meta.env.VITE_LOCATION_API_KEY;
 
 const apiUrl = import.meta.env.VITE_API_SERVER;
 
-// Initialize state object with an empty array for movies
-const state = {
-  movies: []
-};
-
-// Function to fetch movies from the server
-async function fetchMovies(searchTerm) { // Pass searchTerm as an argument
-  try {
-    const response = await axios.get(`${apiUrl}/movies`, { // Send GET request to /movies endpoint
-      params: {
-        // lat, // Provide latitude here
-        // lon, // Provide longitude here
-        searchQuery: searchTerm // Pass the user-provided search term
-      }
-    });
-    if (response.status === 200) {
-      // Update the movies array in the state object with the fetched movie data
-      state.movies = response.data;
-      console.log(state.movies);
-      // Call a function to update the UI with the fetched movie data
-      updateUI();
-    } else {
-      // Handle error responses from the server
-      console.error('Error:', response.data.message);
-    }
-  } catch (error) {
-    // Handle network errors
-    // console.error('Network error:', error);
-  }
-}
-
-// Function to update the UI with the movie data
-function updateUI() {
-  // Example: Loop through the movies array in the state object and display each movie on the UI
-  state.movies.forEach(movie => {
-    // Example: Display movie title and overview in a list
-    const listItem = document.createElement('li');
-    listItem.textContent = `${movie.title}: ${movie.overview}`;
-    document.getElementById('movieList').appendChild(listItem);
-  });
-}
-
-// Call the fetchMovies function when the page loads
-document.addEventListener('DOMContentLoaded', fetchMovies);
-
 function App() {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event) => {
     setCity(event.target.value);
@@ -69,35 +25,38 @@ function App() {
   const handleCitySearch = async (city) => {
     console.log('City:', city);
 
-    // setIsLoading(true);
+    setIsLoading(true);
 
     try {
       const locationResponse = await fetch(`https://us1.locationiq.com/v1/search?key=${locationApiKey}&q=${city}&format=json`);
       if (!locationResponse.ok) {
         throw new Error('Failed to fetch location data');
       }
-      // const locationData = await locationResponse.json();
       const weatherResponse = await fetch(`${apiUrl}/weather?city=${city}`);
-      console.log(locationResponse);
       if (!weatherResponse.ok) {
         throw new Error('Failed to fetch weather data');
       }
       const weatherResponseJson = await weatherResponse.json();
-      console.log(weatherResponseJson);
       setWeatherData(weatherResponseJson);
-      console.log(weatherData);
       setError('');
 
-      // Send request to /movies endpoint with the user-provided search term
-      await fetchMovies(city);
+      // Fetch movies
+      const moviesResponse = await axios.get(`${apiUrl}/movies`, {
+        params: {
+          searchQuery: city
+        }
+      });
+      if (moviesResponse.status === 200) {
+        setMovies(moviesResponse.data);
+      } else {
+        setError('Error fetching movies');
+      }
     } catch (error) {
       console.error(error);
-      // testing to see if I correctly acp"
       setError('Failed to fetch weather data. Please try again.');
-    } 
-    // finally {
-    //   setIsLoading(false);
-    // }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -106,8 +65,31 @@ function App() {
       {weatherData.length > 0 && weatherData.map((data, index) => (
         <Weather key={index} forecast={data} />
       ))}
-      {error && <p className="error-message">{error}</p>}
-      {/* {isLoading && <p>Loading...</p>} */}
+      <div className="movies-container">
+        {isLoading && <p>Loading...</p>}
+        {error && <p className="error-message">{error}</p>}
+        {!isLoading && movies.length > 0 && (
+          <div className="row">
+            {movies.map((movie, index) => (
+              <div key={index} className="col-sm-6 col-md-4 col-lg-3">
+                <div className="item">
+                  <div className="card mb-4">
+                    <img className="card-img-top" src={movie.imageUrl} alt={movie.title} />
+                    <div className="card-body">
+                      <h5 className="card-title">{movie.title}</h5>
+                      <p className="card-text">{movie.overview}</p>
+                      <p className="card-text">Average Votes: {movie.averageVotes}</p>
+                      <p className="card-text">Total Votes: {movie.totalVotes}</p>
+                      <p className="card-text">Popularity: {movie.popularity}</p>
+                      <p className="card-text">Released On: {movie.releasedOn}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
