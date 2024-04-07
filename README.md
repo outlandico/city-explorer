@@ -106,4 +106,6 @@ Start time: 3pm
 Finish time: 617pm
 
 Actual time needed to complete: 3 hours
+
 ![Lighthouse Report](<screenshots/Screenshot 2024-04-06 at 6.16.26 PM.png>)
+
