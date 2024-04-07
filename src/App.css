@@ -66,20 +66,17 @@
   /* Remove list style and text decoration */
   list-style: none;
   text-decoration: none;
-
-
+}
 
 .movie-poster {
   width: 100%;
   height: auto;
   border-radius: 8px;
-
 }
 
 .movie-details {
   margin-top: 0.5rem;
 }
-
 
 .movie-title {
   font-weight: bold;
@@ -87,3 +84,4 @@
 
 .movie-overview {
   color: #240202;
+}
