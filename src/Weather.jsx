@@ -1,8 +1,7 @@
-import { Card } from 'react-bootstrap'; // Import Bootstrap Card component
-import PropTypes from 'prop-types'; // Import PropTypes
+import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 function Weather({ forecast }) {
-  console.log(forecast);
   return (
     <div className="weather-container">
       <h2 className="mb-4">Weather Forecast</h2>
@@ -12,27 +11,36 @@ function Weather({ forecast }) {
           <Card.Text>
             <strong>Description:</strong> {forecast.description}
           </Card.Text>
-          {forecast.temperature && ( // Conditional rendering for temperature
+          {forecast.temperature && (
             <Card.Text>
               <strong>Temperature:</strong> {forecast.temperature}°C
             </Card.Text>
           )}
-          {/* You can add more weather details here */}
+          {forecast.humidity && (
+            <Card.Text>
+              <strong>Humidity:</strong> {forecast.humidity}%
+            </Card.Text>
+          )}
+          {forecast.windSpeed && (
+            <Card.Text>
+              <strong>Wind Speed:</strong> {forecast.windSpeed} km/h
+            </Card.Text>
+          )}
+          {/* Add more weather details here */}
         </Card.Body>
       </Card>
     </div>
   );
 }
 
-// Add prop type validation
 Weather.propTypes = {
   forecast: PropTypes.shape({
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    temperature: PropTypes.number, // Remove isRequired from temperature
-    humidity: PropTypes.number, // Example additional property
-    windSpeed: PropTypes.number, // Example additional property
-    // Add more PropTypes for other properties if needed
+    temperature: PropTypes.number,
+    humidity: PropTypes.number,
+    windSpeed: PropTypes.number,
+    // Add PropTypes for other properties if needed
   }).isRequired,
 };
 
