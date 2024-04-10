@@ -1,3 +1,6 @@
+/* App.css */
+
+/* Existing styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -12,7 +15,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #648bffaa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -41,13 +44,44 @@
   color: #888;
 }
 
-/* app.css */
-
-/* styles.css */
-.red-background {
-  background-color: rgb(14, 173, 168);
-  min-height: 100vh;
+/* New styles for movie grid */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 
+.movie-item {
+  background-color: rgba(15, 212, 199, 0.5); /* Background color with 50% opacity */
+  padding: 1rem;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex; /* Use flexbox layout */
+  flex-direction: column; /* Arrange content vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  width: 200px;
+  /* Remove list style and text decoration */
+  list-style: none;
+  text-decoration: none;
+}
 
+.movie-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.movie-details {
+  margin-top: 0.5rem;
+}
+
+.movie-title {
+  font-weight: bold;
+}
+
+.movie-overview {
+  color: #240202;
+}
