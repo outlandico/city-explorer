@@ -110,3 +110,15 @@ Finish time: 1120pm
 Actual time needed to complete: 4 hours
 
 ![Lighthouse Report](<src/screenshots/Screenshot 2024-04-08 at 11.12.18 PM.png>)
+
+
+Name of feature: Lab Assignment 8 in Trello finished two cards/about to finish 2nd card
+Estimate of time needed to complete: 3
+
+Start time: 2pm
+
+Finish time: 908pm
+
+Actual time needed to complete: 7 hours
+
+![Lighthouse Report](<screenshots/Screenshot 2024-04-14 at 9.10.30 PM.png>) [Lighthouse Report](README.md)
