@@ -7,6 +7,12 @@ import './App.css';
 const locationApiKey = import.meta.env.VITE_LOCATION_API_KEY;
 const apiUrl = import.meta.env.VITE_API_SERVER;
 
+// Define cache object to store movie data and its retrieval time
+const movieCache = {};
+
+// Define the expiration time for cached data in milliseconds (e.g., 1 hour)
+const cacheExpirationTime = 60 * 60 * 1000; // 1 hour
+
 function App() {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState([]);
@@ -34,7 +40,7 @@ function App() {
       setWeatherData(weatherResponseJson);
       setError('');
 
-      // Fetch movies
+      // Fetch movies from cache or API
       const moviesResponse = await fetchMovies(city);
       setMovies(moviesResponse);
     } catch (error) {
@@ -45,15 +51,28 @@ function App() {
     }
   };
 
-  // Function to fetch movies from the server
+  // Function to fetch movies from cache or API
   async function fetchMovies(searchQuery) {
     try {
+      // Check if movie data for the city exists in the cache and is recent
+      const cachedData = movieCache[searchQuery];
+      if (cachedData && Date.now() - cachedData.timestamp < cacheExpirationTime) {
+        console.log(`Using cached data for ${searchQuery}`);
+        return cachedData.data;
+      }
+
+      // Fetch movie data from the server
       const response = await axios.get(`${apiUrl}/movies`, {
         params: {
           searchQuery: searchQuery
         }
       });
       if (response.status === 200) {
+        // Update cache with fresh data
+        movieCache[searchQuery] = {
+          data: response.data,
+          timestamp: Date.now() // Store the retrieval time
+        };
         return response.data;
       } else {
         console.error('Error:', response.data.message);
